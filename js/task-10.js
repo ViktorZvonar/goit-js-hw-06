@@ -3,18 +3,24 @@ function getRandomHexColor() {
 }
 
 const boxesEl = document.querySelector("#boxes");
-const counter = document.querySelector("input");
+const counter = document.querySelector("#controls > input");
 const btnCreate = document.querySelector("button[data-create]");
 const btnDestroy = document.querySelector("button[data-destroy]");
 
-const getItem = () =>
-  `<div style="background-color: ${getRandomHexColor()}; width: 30px; height: 30px;"> </div>`;
+// ------- ПІДКАЖІТЬ БУДЬ ЛАСКА, Я НЕ МОЖУ РОЗІБРАТИСЯ
+// --------НА ЧОМУ ПРОГАНЯТИ ЦИКЛ?
 
-const items = ["item"];
+const items = [
+  `<div style="background-color: ${getRandomHexColor()}; width: 30px; height: 30px;"> </div>`,
+];
+
+for (const item of items) {
+  console.log(item);
+}
 
 const createBoxes = (amount) => {
-  counter.value === amount;
-  const boxes = items.map((item) => getItem(item)).join("");
+  amount = counter.value;
+  const boxes = [...items];
   boxesEl.insertAdjacentHTML("beforeend", boxes);
   console.log(boxesEl);
 };
