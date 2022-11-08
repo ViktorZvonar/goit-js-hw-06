@@ -7,22 +7,23 @@ const counter = document.querySelector("#controls > input");
 const btnCreate = document.querySelector("button[data-create]");
 const btnDestroy = document.querySelector("button[data-destroy]");
 
-// ------- ПІДКАЖІТЬ БУДЬ ЛАСКА, Я НЕ МОЖУ РОЗІБРАТИСЯ
-// --------НА ЧОМУ ПРОГАНЯТИ ЦИКЛ?
-
-const items = [
-  `<div style="background-color: ${getRandomHexColor()}; width: 30px; height: 30px;"> </div>`,
-];
-
-for (const item of items) {
-  console.log(item);
-}
-
 const createBoxes = (amount) => {
-  amount = counter.value;
-  const boxes = [...items];
-  boxesEl.insertAdjacentHTML("beforeend", boxes);
-  console.log(boxesEl);
+  const arrayBoxes = [];
+  for (let i = 0; i < amount; i += 1) {
+    const divEl = document.createElement("div");
+    const px = 30 + 10 * i;
+    divEl.style.height = `${px}px`;
+    divEl.style.width = `${px}px`;
+    divEl.style.background = getRandomHexColor();
+
+    arrayBoxes.push(divEl);
+  }
+  return arrayBoxes;
+};
+
+const fillWithBoxes = () => {
+  let addedBoxes = createBoxes(counter.value);
+  boxesEl.append(...addedBoxes);
 };
 
 const destroyBoxes = () => {
@@ -30,6 +31,7 @@ const destroyBoxes = () => {
   console.log(boxesEl);
 };
 
-btnCreate.addEventListener("click", createBoxes);
+btnCreate.addEventListener("click", fillWithBoxes);
+
 btnDestroy.addEventListener("click", destroyBoxes);
 console.log(boxesEl);
